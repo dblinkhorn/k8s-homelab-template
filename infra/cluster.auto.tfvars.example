@@ -1,0 +1,54 @@
+proxmox_endpoint = "https://<proxmox-host>:8006/"
+proxmox_node_name = "<proxmox-node-name>"
+
+# By default, Proxmox uses its host DNS settings for the VMs. To override them,
+# set dns_servers here, for example: dns_servers = ["192.0.2.53"]
+
+# Defaults from infra/variables.tf:
+# - image_datastore_id:  "local" (Ubuntu image storage)
+# - vm_datastore_id:     "local-lvm" (VM disk storage)
+# - network_bridge:      "vmbr0"
+# - ssh_public_key_path: "~/.ssh/id_ed25519.pub"
+# - template_vm_id:      9000
+#
+# Per-node defaults:
+# - cpu_cores:    2
+# - memory_mb:    4096
+# - disk_size_gb: 40
+#
+# Before provisioning, check that the storage IDs exist under Proxmox
+# Datacenter > Storage, vmbr0 connects to your DHCP network, the SSH public
+# key exists on this machine, and template VMID 9000 is free. If any default
+# does not fit your setup, override that setting at the top level of this file.
+# For example: vm_datastore_id = "local-zfs".
+#
+# Each node uses the per-node size above unless you set cpu_cores, memory_mb,
+# or disk_size_gb inside its entry. Adjust these to fit your host and planned
+# workloads; for example, add memory_mb = 8192 to a worker's entry.
+# Make sure the node VM IDs below are also unused in Proxmox.
+#
+# Configure DHCP reservations for these MAC/IP pairs before provisioning.
+#
+# Add or remove worker entries here. Ansible inventory is generated automatically.
+kubernetes_nodes = {
+  k8s-cp-01 = {
+    vm_id        = 101
+    role         = "control-plane"
+    mac_address  = "02:00:00:00:10:01"
+    reserved_ip  = "<reserved-ip-for-k8s-cp-01>"
+  }
+
+  k8s-worker-01 = {
+    vm_id        = 111
+    role         = "worker"
+    mac_address  = "02:00:00:00:10:11"
+    reserved_ip  = "<reserved-ip-for-k8s-worker-01>"
+  }
+
+  k8s-worker-02 = {
+    vm_id        = 112
+    role         = "worker"
+    mac_address  = "02:00:00:00:10:12"
+    reserved_ip  = "<reserved-ip-for-k8s-worker-02>"
+  }
+}

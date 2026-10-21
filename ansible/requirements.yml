@@ -1,0 +1,7 @@
+---
+collections:
+  - name: https://github.com/dblinkhorn/k8s-homelab.git#/ansible/collection/
+    type: git
+    # When updating to a newer k8s-homelab commit or release, update this
+    # version and infra/main.tf to the same commit or tag.
+    version: e0cb37decc9a2263ab4593d30bb87bd0e36a13f3
