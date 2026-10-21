@@ -134,22 +134,9 @@ changes.
 Commit your non-secret cluster configuration, template files, and
 `infra/.terraform.lock.hcl` to your private repository. Keep credentials,
 kubeconfigs, generated inventory, and tool caches out of Git. OpenTofu state
-is local and ignored by default; back it up securely or configure a private
+is local and ignored by default. Back it up securely or configure a private
 remote backend before provisioning.
 
 If you rebuild nodes at previously used IP addresses, verify their new SSH
-host keys through a trusted channel before updating the matching known-hosts
-entries. Keep SSH host-key checking enabled.
-
-Normal users run `site.yml`. Advanced Ansible overrides can go in
-`ansible/inventory/group_vars/k8s_nodes.yml`; public roles and templates stay
-inside the installed collection. Some roles depend on earlier bootstrap
-phases, so use the collection's orchestration playbooks for ordered execution.
-
-To upgrade the public dependencies, update both dependency references to the
-same newer commit or release tag and rerun
-dependency installation and the relevant commands. Template files do not
-automatically update in your repository. Kubernetes version upgrades remain
-explicit work; changing a dependency reference does not itself upgrade a
-running cluster. Fresh installations may also pick up newer unpinned OS
-packages and Kubernetes patch releases.
+host keys before updating the matching known-hosts entries. Keep SSH host-key
+checking enabled.
