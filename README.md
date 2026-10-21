@@ -13,8 +13,8 @@ VM disks. Install these tools on the machine where you'll run the bootstrap:
 
 | Tool | Version | Used for |
 | --- | --- | --- |
-| OpenTofu (`tofu`) | ≥ 1.13.1 | Provisioning the VMs |
-| Ansible Core (`ansible-playbook`, `ansible-galaxy`) | ≥ 2.18.0 | Preparing nodes and bootstrapping Kubernetes |
+| OpenTofu | ≥1.13.1 | Provisioning the VMs |
+| Ansible Core | ≥2.18.0 | Preparing nodes and bootstrapping Kubernetes |
 
 OpenTofu's minimum is declared in `infra/versions.tf`; Ansible Core's is
 declared in the public collection's `meta/runtime.yml`. Git, Make, and an
