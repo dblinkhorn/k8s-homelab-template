@@ -11,10 +11,10 @@ The supported cluster has one control-plane node and at least one worker, all ru
 You'll need a Proxmox host with API access and storage for the Ubuntu image and
 VM disks. Install these tools on the machine where you'll run the bootstrap:
 
-| Tool | Min. version | Used for |
+| Tool | Version | Used for |
 | --- | --- | --- |
-| OpenTofu (`tofu`) | 1.13.1 | Provisioning the VMs |
-| Ansible Core (`ansible-playbook`, `ansible-galaxy`) | 2.18.0 | Preparing nodes and bootstrapping Kubernetes |
+| OpenTofu (`tofu`) | ≥ 1.13.1 | Provisioning the VMs |
+| Ansible Core (`ansible-playbook`, `ansible-galaxy`) | ≥ 2.18.0 | Preparing nodes and bootstrapping Kubernetes |
 
 OpenTofu's minimum is declared in `infra/versions.tf`; Ansible Core's is
 declared in the public collection's `meta/runtime.yml`. Git, Make, and an
